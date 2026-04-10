@@ -190,7 +190,7 @@ styleEl.textContent = globalStyles;
 document.head.appendChild(styleEl);
 
 /* ─── DATA ──────────────────────────────────────────────── */
-const NAV_LINKS = ["Home","About","Services","Portfolio","Contact"];
+const NAV_LINKS = ["Home","About","Services","Portfolio","Help","Contact"];
 
 const DISHES = [
   { name:"Saffron Lobster Bisque", desc:"House-smoked cream, micro herbs, caviar pearls", tag:"Chef's Signature", img:"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=900&q=95&fit=crop" },
@@ -962,6 +962,83 @@ function Footer({ setActivePage }) {
   );
 }
 
+/* ─── HELP ──────────────────────────────────────────────── */
+function Help({ setActivePage }) {
+  useScrollReveal();
+
+  const faqs = [
+    {
+      question: "How do I make a reservation?",
+      answer: "You can make a reservation by calling us at +91 22 4001 9999, emailing reserve@maharajasfeast.in, or using our online booking system on the Contact page."
+    },
+    {
+      question: "What is the dress code?",
+      answer: "We require smart casual attire. Gentlemen are encouraged to wear jackets, and ladies should wear elegant dresses or suits. No jeans, shorts, or sneakers please."
+    },
+    {
+      question: "Do you offer vegetarian options?",
+      answer: "Yes, we have an extensive vegetarian menu featuring seasonal vegetables, artisanal cheeses, and plant-based creations that rival our meat dishes in sophistication."
+    },
+    {
+      question: "What are your opening hours?",
+      answer: "We are open Tuesday through Sunday from 6:00 PM to 11:00 PM. We are closed on Mondays for staff rest and preparation."
+    },
+    {
+      question: "Can I cancel or modify my reservation?",
+      answer: "Reservations can be modified or cancelled up to 24 hours in advance. Please contact us directly to make changes."
+    },
+    {
+      question: "Do you accept credit cards?",
+      answer: "We accept all major credit cards, debit cards, and digital payment methods. We do not accept cash payments over ₹50,000."
+    },
+    {
+      question: "Is parking available?",
+      answer: "Valet parking is available at the entrance. Our team will take care of your vehicle while you enjoy your meal."
+    },
+    {
+      question: "Do you offer private dining?",
+      answer: "Yes, we have three private dining rooms available for groups of 8-40 guests. These can be booked for special occasions and corporate events."
+    },
+    {
+      question: "What is the average price per person?",
+      answer: "Our tasting menu starts at ₹12,000 per person, with à la carte options ranging from ₹8,000 to ₹25,000 per person, excluding beverages and service charge."
+    },
+    {
+      question: "Can I bring my own wine?",
+      answer: "We have a comprehensive wine cellar, but we do allow BYO with a ₹5,000 corkage fee per bottle. Please inform us in advance."
+    }
+  ];
+
+  return (
+    <div style={{ background:"var(--black)", minHeight:"100vh", padding:"72px 24px 60px" }}>
+      <div style={{ maxWidth:"1280px", margin:"0 auto" }}>
+        <SectionHeader label="Support" heading="Frequently" accent="Asked Questions" />
+
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(400px,1fr))", gap:"24px", marginTop:"40px" }}>
+          {faqs.map((faq, i) => (
+            <div key={i} className="card-hover section-reveal"
+              style={{ background:"var(--black-card)", borderRadius:"var(--radius-md)", padding:"24px", border:"1px solid var(--border)" }}>
+              <h3 style={{ fontFamily:"var(--font-heading)", fontSize:"1.1rem", color:"var(--gold)", marginBottom:"12px", fontWeight:600 }}>
+                {faq.question}
+              </h3>
+              <p style={{ fontFamily:"var(--font-body)", color:"var(--muted)", fontSize:"0.88rem", lineHeight:1.7, fontWeight:300 }}>
+                {faq.answer}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ textAlign:"center", marginTop:"60px" }}>
+          <p style={{ fontFamily:"var(--font-body)", color:"var(--muted)", fontSize:"0.9rem", marginBottom:"20px" }}>
+            Still have questions? We're here to help.
+          </p>
+          <button onClick={() => setActivePage("Contact")} className="btn-gold">Contact Us</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── APP ROOT ──────────────────────────────────────────── */
 export default function App() {
   const [activePage, setActivePage] = useState("Home");
@@ -979,7 +1056,7 @@ export default function App() {
     document.body.style.color = isDark ? "#F2E8D5" : "#1A120A";
   }, [isDark]);
 
-  const PAGE = { Home, About, Services, Portfolio, Contact };
+  const PAGE = { Home, About, Services, Portfolio, Help, Contact };
   const PageComponent = PAGE[activePage];
 
   return (
